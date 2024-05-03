@@ -1,10 +1,18 @@
-import { useState, useMemo, useRef, useEffect, forwardRef } from "react";
+import {
+  useState,
+  useMemo,
+  useRef,
+  useEffect,
+  forwardRef,
+  createContext,
+} from "react";
 import { useToggle } from "../src/hooks/useToggle";
 
 import "./App.css";
 import Sidebar from "./Sidebar/Sidebar";
 import Modal from "./Modal/Modal";
 import Player from "./Player/Player";
+import { UserMenu } from "./UserMenu/UserMenu";
 
 export default function App() {
   // --- useMemo hook ---
@@ -66,28 +74,7 @@ export default function App() {
 
   // 5 - Перенаправлення рефів
 
-  // const [modalOpen, setModalOpen] = useState(false); // State for modal
-  // // Function to open the modal
-  // const openModal = () => {
-  //   setModalOpen(true);
-  // };
-  // // Function to close the modal
-  // const closeModal = () => {
-  //   setModalOpen(false);
-  // };
-
-  // const [sidebarOpen, setSidebarOpen] = useState(false); // State for sidebar
-
-  // // Function to open the sidebar
-  // const openSidebar = () => {
-  //   setSidebarOpen(true);
-  // };
-  // // Function to close the sidebar
-  // const closeSidebar = () => {
-  //   setSidebarOpen(false);
-  // };
-
-  // Toggle
+  // State for sidebar
   const {
     isOpen: isSidebarOpen,
     open: openSidebar,
@@ -100,6 +87,10 @@ export default function App() {
     open: openModal,
     close: closeModal,
   } = useToggle(false);
+
+  // 6 - Контекст
+
+  const myContext = createContext();
 
   return (
     <>
@@ -150,6 +141,11 @@ export default function App() {
             <p>Sidebar content goes here...</p>
           </Sidebar>
         )}
+      </div>
+      <hr />
+      <h3>6 - Контекст</h3>
+      <div>
+        <UserMenu />
       </div>
     </>
   );
